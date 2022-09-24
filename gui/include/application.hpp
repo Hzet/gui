@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <string>
+#include "window.hpp"
 
 namespace gui
 {
@@ -12,11 +13,14 @@ namespace gui
 	{
 	public:
 		void run();
+		void close(); 
 
+	protected:
 		virtual void update();
+		virtual bool should_update();
 
 	private:
-		bool should_update() const;
+		window m_window;
 
 	};
 }

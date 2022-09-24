@@ -115,23 +115,15 @@
  *                                                                      *
  *                                                                      *
  *																		*/
-#include "application.hpp"
 
-class test_application
-	: public gui::application
-{
-public:
-	test_application(std::uint64_t w, std::uint64_t h, std::string title)
-	{
-		create_window(w, h, title);
-	}
-};
+#include <iostream>
+#include "application.hpp"
 
 namespace gui
 {
 	std::unique_ptr<application> create_application()
 	{
-		auto result = test_application{ 1280, 1024, "Test application" };
+		return std::make_unique<application>();
 	}
 }
 
@@ -141,9 +133,9 @@ int main()
 	{
 		auto app = gui::create_application();
 
-		app.run();
+		app->run();
 
-		app.close();
+		app->close();
 	}
 	catch (std::exception& e)
 	{
