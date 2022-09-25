@@ -28,9 +28,6 @@
     <ClInclude Include="include\gl-core.hpp">
       <Filter>gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl-core.cpp">
-      <Filter>gui</Filter>
-    </ClInclude>
     <ClInclude Include="include\vertex-buffer.hpp">
       <Filter>gui</Filter>
     </ClInclude>
@@ -41,6 +38,12 @@
       <Filter>gui</Filter>
     </ClInclude>
     <ClInclude Include="include\vertex-layout.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\draw-type.hpp">
       <Filter>gui</Filter>
     </ClInclude>
   </ItemGroup>
@@ -70,6 +73,12 @@
       <Filter>gui</Filter>
     </ClCompile>
     <ClCompile Include="src\vertex-buffer.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gl-core.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer.cpp">
       <Filter>gui</Filter>
     </ClCompile>
   </ItemGroup>
