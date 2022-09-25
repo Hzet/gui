@@ -53,9 +53,9 @@
  *  necessary for user to have access to is contained in 'internal'     *
  *  sub-namespace                                                       *
  *                                                                      *
- *  - application:                                                      *
- *    > manages window display, triggers main program loop              *
- *    > virtual base class, user can create an instance by defining     *
+ *+ - application:                                                      *
+ *+   > manages window display, triggers main program loop              *
+ *+   > virtual base class, user can create an instance by defining     *
  *    create_window function                                            *
  *                                                                      *
  *  - buffers:                                                          *

@@ -23,15 +23,26 @@
     <ClInclude Include="include\debug.hpp" />
     <ClInclude Include="include\exception.hpp" />
     <ClInclude Include="include\gl-core.hpp" />
+    <ClInclude Include="include\index-buffer.hpp" />
+    <ClInclude Include="include\vertex-array.hpp" />
+    <ClInclude Include="include\vertex-buffer.hpp" />
+    <ClInclude Include="include\vertex-layout.hpp" />
     <ClInclude Include="include\window.hpp" />
-    <ClInclude Include="src\gl-core.cpp" />
+    <ClCompile Include="src\gl-core.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\exception.cpp" />
+    <ClCompile Include="src\index-buffer.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\vertex-array.cpp" />
+    <ClCompile Include="src\vertex-buffer.cpp" />
+    <ClCompile Include="src\vertex-layout.cpp" />
     <ClCompile Include="src\window.cpp" />
     <ClCompile Include="vendor\src\glad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\vertex-layout.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

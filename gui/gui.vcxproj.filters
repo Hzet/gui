@@ -31,6 +31,18 @@
     <ClInclude Include="src\gl-core.cpp">
       <Filter>gui</Filter>
     </ClInclude>
+    <ClInclude Include="include\vertex-buffer.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\index-buffer.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vertex-array.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vertex-layout.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp">
@@ -48,5 +60,22 @@
     <ClCompile Include="src\window.cpp">
       <Filter>gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\vertex-layout.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\index-buffer.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertex-array.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertex-buffer.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\vertex-layout.inl">
+      <Filter>gui</Filter>
+    </None>
   </ItemGroup>
 </Project>

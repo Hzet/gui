@@ -1,6 +1,5 @@
 #pragma once
 
-#ifdef STE_DEBUG
 #include <iostream>
 
 #define STE_HALT() __debugbreak()
@@ -14,15 +13,3 @@ do \
 		STE_HALT(); \
 	} \
 } while(false)
-
-#else
-
-#define STE_HALT()
-
-#define STE_ASSERT(condition, message) \
-do \
-{ \
-	(void)sizeof(condition); \
-} while(false)
-
-#endif

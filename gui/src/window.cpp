@@ -1,8 +1,6 @@
 #include "window.hpp"
 #include "exception.hpp"
 
-
-
 #include <iostream>
 #include <iomanip>
 
