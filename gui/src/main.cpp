@@ -58,18 +58,18 @@
  *+   > virtual base class, user can create an instance by defining     *
  *    create_window function                                            *
  *                                                                      *
- *  - buffers:                                                          *
- *    > index buffer                                                    *
- *    > vertex buffer                                                   *
- *    > vertex array                                                    *
+ *+ - buffers:                                                          *
+ *+   > index buffer                                                    *
+ *+   > vertex buffer                                                   *
+ *+   > vertex array                                                    *
  *                                                                      *
- *  - renderer:                                                         *
- *    > facility to provide a way to display graphic objects            *
+ *+ - renderer:                                                         *
+ *+   > facility to provide a way to display graphic objects            *
  *    > a pointer to the renderer is embedded in graphic objects,       *
  *      so they can be drawn in place                                   *
  *                                                                      *
- *  - shaders:                                                          *
- *    > only basic shaders, with fixed amount                           *
+ *+ - shaders:                                                          *
+ *+   > only basic shaders, with fixed amount                           *
  *      of uniforms are implemented                                     *
  *                                                                      *
  *  - shapes and figures:                                               *

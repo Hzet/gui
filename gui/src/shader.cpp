@@ -1,7 +1,8 @@
+#include "shader-type.hpp"
 #include "exception.hpp"
 #include "gl-core.hpp"
 #include "shader.hpp"
-
+#include <string.h>
 #include <fstream>
 #include <glm/ext.hpp>
 
@@ -9,50 +10,46 @@ namespace gui
 {
 	namespace internal
 	{
-		static std::uint32_t compile_sub_shader(const std::string const& source);
+		static std::uint32_t compile_shader_program(std::string const& vertex_path, std::string const& fragment_path);
 		static std::uint32_t get_uniform_location(std::string const& name, std::uint32_t shader_index);
+		static std::uint32_t load_sub_shader(std::string const& filepath, shader_type type);
 		static std::string read_file_content(std::string const& filepath);
 		
-		static std::uint32_t compile_sub_shader(const std::string const& source)
+		shader::shader()
+			: m_gl_index{ 0u }
+			, m_moving{ false }
 		{
-			if (source.empty())
-			{
-				STE_EXCEPTION("Shader source code failed to compile: source code is empty");
-				return false;
-			}
+		}
 
-			const char *source = source.c_str();
 
-			create();
-			AGL_CALL(glShaderSource(objectID_, 1u, &source, NULL));
-			AGL_CALL(glCompileShader(objectID_));
+		shader::shader(shader&& other)
+			: m_gl_index{ other.m_gl_index }
+			, m_moving{ true }
+		{
+		}
 
-			std::int32_t result;
-
-			AGL_CALL(glGetShaderiv(objectID_, GL_COMPILE_STATUS, &result));
-
-			if (!result)
-			{
-				std::int32_t length;
-				std::string message;
-				AGL_CALL(glGetShaderiv(objectID_, GL_INFO_LOG_LENGTH, &length));
-
-				message.resize(length);
-				AGL_CALL(glGetShaderInfoLog(objectID_, length, nullptr, &message[0u]));
-
-				AGL_CORE_ERROR("Shader [{}] sub program could not be compiled!\n{}", error::SUBSHADER_COMPILE, getShaderName(type_), message);
-
-				return false;
-			}
-			return true;
+		shader::~shader()
+		{
+			if (!m_moving)
+				destroy();
 		}
 
 		void shader::load_from_files(std::string const& vertex_path, std::string const& fragment_path)
 		{
-			auto vertex_source = read_file_content(vertex_path);
-			auto fragment_source = read_file_content(fragment_path);
+			m_gl_index = compile_shader_program(vertex_path, fragment_path);
+		}
 
-			compile(vertex_source, fragment_source);
+		bool shader::is_created() const
+		{
+			return m_gl_index == 0;
+		}
+
+		void shader::destroy()
+		{
+			if(is_created())
+				GL_CALL(glDeleteShader(m_gl_index));
+
+			m_gl_index = 0;
 		}
 
 		void shader::bind() const
@@ -60,48 +57,78 @@ namespace gui
 			GL_CALL(glUseProgram(m_gl_index));
 		}
 
-		void shader::setUniform(const std::string &name, const float value) const
+		void shader::set_uniform(const std::string &name, const float value) const
 		{
 			GL_CALL(glUniform1f(get_uniform_location(name, m_gl_index), value));
 		}
 
-		void shader::setUniform(const std::string &name, const std::int32_t value) const
+		void shader::set_uniform(const std::string &name, const std::int32_t value) const
 		{
 			GL_CALL(glUniform1i(get_uniform_location(name, m_gl_index), value));
 		}
 
-		void shader::setUniform(const std::string &name, const std::uint32_t value) const
+		void shader::set_uniform(const std::string &name, const std::uint32_t value) const
 		{
 			GL_CALL(glUniform1ui(get_uniform_location(name, m_gl_index), value));
 		}
 
-		void shader::setUniform(const std::string &name, const glm::vec2 &value) const
+		void shader::set_uniform(const std::string &name, const glm::vec2 &value) const
 		{
 			GL_CALL(glUniform2f(get_uniform_location(name, m_gl_index), value.x, value.y));
 		}
 
-		void shader::setUniform(const std::string &name, const glm::vec3 &value) const
+		void shader::set_uniform(const std::string &name, const glm::vec3 &value) const
 		{
 			GL_CALL(glUniform3f(get_uniform_location(name, m_gl_index), value.x, value.y, value.z));
 		}
 
-		void shader::setUniform(const std::string &name, const glm::vec4 &value) const
+		void shader::set_uniform(const std::string &name, const glm::vec4 &value) const
 		{
 			GL_CALL(glUniform4f(get_uniform_location(name, m_gl_index), value.x, value.y, value.z, value.w));
 		}
 
-		void shader::setUniform(const std::string &name, const glm::mat4 &value) const
+		void shader::set_uniform(const std::string &name, const glm::mat4 &value) const
 		{
 			GL_CALL(glUniformMatrix4fv(get_uniform_location(name, m_gl_index), 1u, GL_FALSE, glm::value_ptr(value)));
 		}
 
-		void shader::setUniform(const std::string &name, std::int32_t const * const value, std::uint64_t count) const
+		void shader::set_uniform(const std::string &name, std::int32_t const * const value, std::uint64_t count) const
 		{
 			GL_CALL(glUniform1iv(get_uniform_location(name, m_gl_index), count, value));
 		}
 
-		void compile(std::string const& vertex_source, std::string const& fragment_source)
+		std::uint32_t compile_shader_program(std::string const& vertex_path, std::string const& fragment_path)
 		{
+			auto vertex_index = load_sub_shader(vertex_path, VERTEX);
+			auto fragment_index = load_sub_shader(fragment_path, FRAGMENT);
+			auto shader_index = std::uint32_t{};
+
+			GL_CALL(shader_index = glCreateProgram());
+			GL_CALL(glAttachShader(shader_index, vertex_index));
+			GL_CALL(glAttachShader(shader_index, fragment_index));
+
+			GL_CALL(glLinkProgram(shader_index));
+
+			GL_CALL(glDeleteShader(vertex_index));
+			GL_CALL(glDeleteShader(fragment_index));
+
+			std::int32_t result;
+			GL_CALL(glGetProgramiv(shader_index, GL_LINK_STATUS, &result));
+
+			if (!result)
+			{
+				std::int32_t length;
+				GL_CALL(glGetProgramiv(shader_index, GL_INFO_LOG_LENGTH, &length));
+
+				std::string message;
+				message.resize(length);
+
+				GL_CALL(glGetProgramInfoLog(shader_index, length, NULL, &message[0u]));
+
+				STE_EXCEPTION("Shader source code failed to link.\nMessage: " + message);
+			}
+
+			return shader_index;
 		}
 
 		static std::uint32_t get_uniform_location(std::string const& name, std::uint32_t shader_index)
@@ -136,6 +163,37 @@ namespace gui
 			file.close();
 
 			return content;
+		}
+
+		static std::uint32_t load_sub_shader(std::string const& filepath, shader_type type)
+		{
+			auto const* const source = read_file_content(filepath).c_str();
+
+			if (std::strlen(source))
+				STE_EXCEPTION("Shader source code failed to compile. File: " + filepath + "\nMessage: source code is empty");
+
+			auto gl_index = std::uint32_t{};
+
+			GL_CALL(gl_index = glCreateShader(type));
+
+			GL_CALL(glShaderSource(gl_index, 1u, &source, NULL));
+			GL_CALL(glCompileShader(gl_index));
+
+			std::int32_t result;
+
+			GL_CALL(glGetShaderiv(gl_index, GL_COMPILE_STATUS, &result));
+
+			if (!result)
+			{
+				std::int32_t length;
+				std::string message;
+				GL_CALL(glGetShaderiv(gl_index, GL_INFO_LOG_LENGTH, &length));
+
+				message.resize(length);
+				GL_CALL(glGetShaderInfoLog(gl_index, length, nullptr, &message[0u]));
+
+				STE_EXCEPTION("Shader source code failed to compile. File: " + filepath + "\nMessage: " + message);
+			}
 		}
 	}
 }

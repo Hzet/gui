@@ -46,12 +46,15 @@
     <ClInclude Include="src\draw-type.hpp">
       <Filter>gui</Filter>
     </ClInclude>
+    <ClInclude Include="include\shader.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader-type.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
       <Filter>gui</Filter>
     </ClCompile>
     <ClCompile Include="vendor\src\glad.c">
@@ -81,6 +84,10 @@
     <ClCompile Include="src\renderer.cpp">
       <Filter>gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\shader.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\vertex-layout.inl">

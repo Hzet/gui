@@ -1,8 +1,8 @@
 #include "data-type.hpp"
 #include "draw-type.hpp"
 #include "renderer.hpp"
-#include "vertex-array.hpp"
 #include "gl-core.hpp"
+#include "vertex-array.hpp"
 
 namespace gui
 {
@@ -14,5 +14,12 @@ namespace gui
 			GL_CALL(glDrawArrays(type, 0, v_array.get_vertex_count()));
 		else
 			GL_CALL(glDrawElements(type, v_array.get_index_count(), internal::UINT, 0));
+	}
+
+	void renderer::init()
+	{
+		m_shader.load_from_files("vshader.s", "fshader.s");
+
+		m_shader.bind();
 	}
 }

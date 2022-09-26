@@ -6,6 +6,9 @@ namespace gui
 	{
 		m_window = window::create({ 1280, 1024 }, "Application");
 
+		m_renderer = renderer{};
+		m_renderer.init();
+
 		while (should_update())
 		{
 			this->update();
