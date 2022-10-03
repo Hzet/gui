@@ -8,6 +8,34 @@ namespace gui
 {
 	namespace internal
 	{
+		void renderer::clear() const
+		{
+			GL_CALL(glClearColor(m_clear_color.x, m_clear_color.y, m_clear_color.z, m_clear_color.w));
+			GL_CALL(glClear(m_clear_type));
+		}
+
+		void renderer::set_clear_color(glm::vec4 const& color)
+		{
+			m_clear_color = color;
+		}
+
+		glm::vec4 const& renderer::get_clear_color() const
+		{
+			return m_clear_color;
+		}
+
+
+		void renderer::set_clear_type(clear_type type)
+		{
+			m_clear_type = type;
+		}
+
+
+		gui::clear_type renderer::set_clear_type() const
+		{
+			return m_clear_type;
+		}
+
 		void renderer::draw(internal::vertex_array const& v_array, internal::draw_type type) const
 		{
 			v_array.bind();

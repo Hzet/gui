@@ -22,6 +22,8 @@
     <ClInclude Include="include\application.hpp" />
     <ClInclude Include="include\clear-type.hpp" />
     <ClInclude Include="include\debug.hpp" />
+    <ClInclude Include="include\event-type.hpp" />
+    <ClInclude Include="include\event.hpp" />
     <ClInclude Include="include\exception.hpp" />
     <ClInclude Include="include\gl-core.hpp" />
     <ClInclude Include="include\index-buffer.hpp" />
@@ -31,6 +33,7 @@
     <ClInclude Include="include\vertex-array.hpp" />
     <ClInclude Include="include\vertex-buffer.hpp" />
     <ClInclude Include="include\vertex-layout.hpp" />
+    <ClInclude Include="include\window-data.hpp" />
     <ClInclude Include="include\window.hpp" />
     <ClCompile Include="src\gl-core.cpp" />
     <ClInclude Include="src\draw-type.hpp" />

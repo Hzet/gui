@@ -1,9 +1,9 @@
 #pragma once
-#include "clear-type.hpp"
+#include "event.hpp"
 #include "gl-core.hpp"
 #include "renderer.hpp"	
+#include "window-data.hpp"
 
-#include <glm/glm.hpp>
 #include <string>
 
 struct GLFWwindow;
@@ -30,15 +30,16 @@ namespace gui
 
 		window() = default;
 		window(window&& other);
+		window(window const&) = delete;
 		window& operator=(window&& other);
+		window& operator=(window const&) = delete;
 		~window();
 
 		bool is_open();
 		void close();
 
 		void display() const;
-		//bool poll_event() const;
-
+		bool poll_event(event& e);
 
 	private:
 		window(glm::ivec2 resolution, std::string const &title);
@@ -48,10 +49,6 @@ namespace gui
 		static std::uint64_t s_window_count;
 
 		std::unique_ptr<GLFWwindow, detail::glfw_window_deleter> m_handle;
-		glm::uvec2 m_resolution;
-		std::string m_title;
-		glm::ivec2 m_viewport;
-		glm::vec3 m_clear_color;
-		clear_type m_clear_type;
+		window_data m_data;
 	};
 }

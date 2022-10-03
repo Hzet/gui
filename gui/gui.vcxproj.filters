@@ -64,6 +64,15 @@
     <ClInclude Include="include\renderer.hpp">
       <Filter>gui\internal</Filter>
     </ClInclude>
+    <ClInclude Include="include\event.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\event-type.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\window-data.hpp">
+      <Filter>gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp">
