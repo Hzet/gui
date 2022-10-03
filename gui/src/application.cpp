@@ -5,13 +5,12 @@ namespace gui
 	void application::run()
 	{
 		m_window = window::create({ 1280, 1024 }, "Application");
-
-		m_renderer = renderer{};
-		m_renderer.init();
-
-		while (should_update())
+		
+		while (m_window.is_open())
 		{
 			this->update();
+
+			m_window.display();
 		}
 	}
 
@@ -22,11 +21,5 @@ namespace gui
 
 	void application::update()
 	{
-
-	}
-
-	bool application::should_update()
-	{
-		return m_window.update();
 	}
 }

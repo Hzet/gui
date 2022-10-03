@@ -2,7 +2,6 @@
 #include <memory>
 #include <string>
 
-#include "renderer.hpp"
 #include "window.hpp"
 
 namespace gui
@@ -19,10 +18,8 @@ namespace gui
 
 	protected:
 		virtual void update();
-		virtual bool should_update();
 
 	private:
-		renderer m_renderer;
 		window m_window;
 	};
 }

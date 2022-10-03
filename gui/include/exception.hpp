@@ -4,16 +4,10 @@
 
 #include "debug.hpp"
 
-#ifdef STE_DEBUG
-#include <iostream>
-#define STE_EXCEPTION(message) \
-do \
-{ \
-	std::cerr << "Exception raised!\nMessage: " << message << std::endl; \
-	STE_HALT(); \
-} while(false)
+#ifdef GUI_DEBUG
+#define GUI_EXCEPTION(message) GUI_ASSERT(false, message);
 #else
-#define STE_EXCEPTION(message) throw ::gui::exception{ message }
+#define GUI_EXCEPTION(message) throw ::gui::exception{ message }
 #endif
 
 namespace gui

@@ -11,6 +11,15 @@
     <Filter Include="vendor\glad">
       <UniqueIdentifier>{43d4457b-bc61-40f8-bdb5-8e1d3ed1d220}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gui\debug">
+      <UniqueIdentifier>{69db9c08-3163-4fa3-a832-fcaac72c16b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gui\internal">
+      <UniqueIdentifier>{88a04dc2-d387-4323-821c-a86793288327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gui\resource">
+      <UniqueIdentifier>{f074b4b8-de1f-46ba-946f-ba617c32063d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\application.hpp">
@@ -20,37 +29,40 @@
       <Filter>gui</Filter>
     </ClInclude>
     <ClInclude Include="include\debug.hpp">
-      <Filter>gui</Filter>
+      <Filter>gui\debug</Filter>
     </ClInclude>
     <ClInclude Include="include\exception.hpp">
-      <Filter>gui</Filter>
+      <Filter>gui\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\draw-type.hpp">
+      <Filter>gui\internal</Filter>
     </ClInclude>
     <ClInclude Include="include\gl-core.hpp">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="include\vertex-buffer.hpp">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="include\index-buffer.hpp">
-      <Filter>gui</Filter>
+      <Filter>gui\internal</Filter>
     </ClInclude>
     <ClInclude Include="include\vertex-array.hpp">
-      <Filter>gui</Filter>
+      <Filter>gui\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vertex-buffer.hpp">
+      <Filter>gui\internal</Filter>
     </ClInclude>
     <ClInclude Include="include\vertex-layout.hpp">
+      <Filter>gui\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader-type.hpp">
+      <Filter>gui\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader.hpp">
+      <Filter>gui\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\index-buffer.hpp">
+      <Filter>gui\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\clear-type.hpp">
       <Filter>gui</Filter>
     </ClInclude>
     <ClInclude Include="include\renderer.hpp">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\draw-type.hpp">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="include\shader.hpp">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="include\shader-type.hpp">
-      <Filter>gui</Filter>
+      <Filter>gui\internal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -60,38 +72,44 @@
     <ClCompile Include="vendor\src\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
-    <ClCompile Include="src\exception.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
     <ClCompile Include="src\window.cpp">
       <Filter>gui</Filter>
     </ClCompile>
-    <ClCompile Include="src\vertex-layout.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\index-buffer.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vertex-array.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vertex-buffer.cpp">
-      <Filter>gui</Filter>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\exception.cpp">
+      <Filter>gui\debug</Filter>
     </ClCompile>
     <ClCompile Include="src\gl-core.cpp">
-      <Filter>gui</Filter>
+      <Filter>gui\internal</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer.cpp">
-      <Filter>gui</Filter>
+    <ClCompile Include="src\vertex-array.cpp">
+      <Filter>gui\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertex-buffer.cpp">
+      <Filter>gui\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertex-layout.cpp">
+      <Filter>gui\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\index-buffer.cpp">
+      <Filter>gui\internal</Filter>
     </ClCompile>
     <ClCompile Include="src\shader.cpp">
-      <Filter>gui</Filter>
+      <Filter>gui\internal</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\renderer.cpp">
+      <Filter>gui\internal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\vertex-layout.inl">
-      <Filter>gui</Filter>
+      <Filter>gui\internal</Filter>
+    </None>
+    <None Include="resource\fshader.s">
+      <Filter>gui\resource</Filter>
+    </None>
+    <None Include="resource\vshader.s">
+      <Filter>gui\resource</Filter>
     </None>
   </ItemGroup>
 </Project>

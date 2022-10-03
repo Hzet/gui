@@ -8,7 +8,7 @@ constexpr std::uint32_t vertex_layout::get_type_size(const std::uint32_t type)
 	case GL_UNSIGNED_BYTE: return sizeof(std::uint8_t);
 	}
 
-	STE_ASSERT(false, "Unknown buffer data type!");
+	GUI_ASSERT(false, "Unknown buffer data type!");
 	return 0u;
 }
 

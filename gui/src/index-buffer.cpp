@@ -58,8 +58,8 @@ namespace gui
 
 		void index_buffer::allocate(std::uint32_t const * const data, std::uint32_t count)
 		{
-			STE_ASSERT(count != 0u, "Can not allocate no memory!");
-			STE_ASSERT(m_count == 0u, "Overriding previous allocation!");
+			GUI_ASSERT(count != 0u, "Can not allocate no memory!");
+			GUI_ASSERT(m_count == 0u, "Overriding previous allocation!");
 
 			create();
 			bind();
@@ -70,9 +70,9 @@ namespace gui
 
 		void index_buffer::buffer(std::uint32_t const * const data, std::uint32_t offset, std::uint32_t count)
 		{
-			STE_ASSERT(count != 0u, "Buffering data of zero size!");
-			STE_ASSERT(m_count != 0u, "Buffer has not been allocated yet!");
-			STE_ASSERT(offset + count < m_count, "Overflowing buffer size!");
+			GUI_ASSERT(count != 0u, "Buffering data of zero size!");
+			GUI_ASSERT(m_count != 0u, "Buffer has not been allocated yet!");
+			GUI_ASSERT(offset + count < m_count, "Overflowing buffer size!");
 
 			bind();
 			GL_CALL(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset * sizeof(std::uint32_t), count * sizeof(std::uint32_t), data));

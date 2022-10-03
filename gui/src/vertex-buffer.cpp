@@ -61,8 +61,8 @@ namespace gui
 
 		void vertex_buffer::allocate(std::byte const * const data, const std::uint32_t size, const std::uint32_t count)
 		{
-			STE_ASSERT(size != 0u, "Reserving an empty buffer!");
-			STE_ASSERT(count != 0u, "Count is required!");
+			GUI_ASSERT(size != 0u, "Reserving an empty buffer!");
+			GUI_ASSERT(count != 0u, "Count is required!");
 
 			create();
 			bind();
@@ -75,8 +75,8 @@ namespace gui
 
 		void vertex_buffer::buffer(void const * const data, const std::uint32_t offset, const std::uint32_t size)
 		{
-			STE_ASSERT(data != nullptr, "Can not set nullptr data!");
-			STE_ASSERT(offset + size <= get_size(), "Buffer overflow!");
+			GUI_ASSERT(data != nullptr, "Can not set nullptr data!");
+			GUI_ASSERT(offset + size <= get_size(), "Buffer overflow!");
 
 			bind();
 

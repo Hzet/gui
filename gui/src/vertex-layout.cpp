@@ -22,7 +22,7 @@ namespace gui
 
 		const vertex_layout::element& vertex_layout::operator[](const std::uint32_t index) const
 		{
-			STE_ASSERT(index < m_element.size(), "Index out of bounds!");
+			GUI_ASSERT(index < m_element.size(), "Index out of bounds!");
 
 			return m_element[index];
 		}

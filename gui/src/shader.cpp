@@ -21,7 +21,6 @@ namespace gui
 		{
 		}
 
-
 		shader::shader(shader&& other)
 			: m_gl_index{ other.m_gl_index }
 			, m_moving{ true }
@@ -125,7 +124,7 @@ namespace gui
 
 				GL_CALL(glGetProgramInfoLog(shader_index, length, NULL, &message[0u]));
 
-				STE_EXCEPTION("Shader source code failed to link.\nMessage: " + message);
+				GUI_EXCEPTION("Shader source code failed to link.\nMessage: " + message);
 			}
 
 			return shader_index;
@@ -136,7 +135,7 @@ namespace gui
 			std::uint32_t result;
 
 			GL_CALL(result = glGetUniformLocation(shader_index, name.c_str()));
-			STE_ASSERT(result != -1, "Uniform with such name does not exist!\nName: {}", name);
+			GUI_ASSERT(result != -1, "Uniform with such name does not exist!\nName: " + name);
 
 			return result;
 		}
@@ -149,7 +148,7 @@ namespace gui
 			if (!file)
 			{
 				file.close();
-				STE_EXCEPTION("Failed to open file: " + filepath);
+				GUI_EXCEPTION("Failed to open file: " + filepath);
 			}
 
 			auto content = std::string{};
@@ -167,10 +166,11 @@ namespace gui
 
 		static std::uint32_t load_sub_shader(std::string const& filepath, shader_type type)
 		{
-			auto const* const source = read_file_content(filepath).c_str();
+			auto const content = read_file_content(filepath);
+			auto const* const source = content.c_str();
 
-			if (std::strlen(source))
-				STE_EXCEPTION("Shader source code failed to compile. File: " + filepath + "\nMessage: source code is empty");
+			if (std::strlen(source) == 0)
+				GUI_EXCEPTION("Shader source code failed to compile. File: " + filepath + "\nMessage: source code is empty");
 
 			auto gl_index = std::uint32_t{};
 
@@ -192,8 +192,10 @@ namespace gui
 				message.resize(length);
 				GL_CALL(glGetShaderInfoLog(gl_index, length, nullptr, &message[0u]));
 
-				STE_EXCEPTION("Shader source code failed to compile. File: " + filepath + "\nMessage: " + message);
+				GUI_EXCEPTION("Shader source code failed to compile. File: " + filepath + "\nMessage: " + message);
 			}
+
+			return gl_index;
 		}
 	}
 }
