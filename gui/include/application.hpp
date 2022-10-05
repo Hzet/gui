@@ -13,13 +13,19 @@ namespace gui
 	class application
 	{
 	public:
-		void run();
-		void close(); 
+		static application& get_application();
 
-	protected:
-		virtual void update();
+		void create(glm::ivec2 const& resolution, std::string const& name);
+		void close(); 
+		void run();
+
+		window& get_window();
 
 	private:
-		window m_window;
+		static application s_application;
+
+		void process_window_events();
+
+		std::unique_ptr<window> m_window;
 	};
 }

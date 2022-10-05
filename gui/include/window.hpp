@@ -23,9 +23,6 @@ namespace gui
 		: public internal::renderer
 	{
 	public:
-		static window create(glm::ivec2 resolution, std::string const& title);
-
-	public:
 		using internal::renderer::renderer;
 
 		window() = default;
@@ -35,16 +32,17 @@ namespace gui
 		window& operator=(window const&) = delete;
 		~window();
 
+		void open(glm::ivec2 const& resolution, std::string const& title);
 		bool is_open();
 		void close();
 
 		void display() const;
 		bool poll_event(event& e);
 
+		GLFWwindow* get_handle();
+
 	private:
 		window(glm::ivec2 resolution, std::string const &title);
-		
-		void open();
 
 		static std::uint64_t s_window_count;
 

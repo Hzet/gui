@@ -14,6 +14,7 @@ namespace gui
 		class renderer
 		{
 		public:
+			renderer();
 			virtual ~renderer() = default;
 
 			void clear() const;

@@ -27,6 +27,7 @@
     <ClInclude Include="include\exception.hpp" />
     <ClInclude Include="include\gl-core.hpp" />
     <ClInclude Include="include\index-buffer.hpp" />
+    <ClInclude Include="include\input.hpp" />
     <ClInclude Include="include\renderer.hpp" />
     <ClInclude Include="include\shader-type.hpp" />
     <ClInclude Include="include\shader.hpp" />
@@ -42,6 +43,7 @@
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\exception.cpp" />
     <ClCompile Include="src\index-buffer.cpp" />
+    <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\shader.cpp" />

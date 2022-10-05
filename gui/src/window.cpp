@@ -35,15 +35,6 @@ namespace gui
 
 	std::uint64_t window::s_window_count = 0;
 
-	window window::create(glm::ivec2 resolution, std::string const& title)
-	{
-		auto handle = window{ resolution, title };
-
-		handle.open();
-
-		return handle;
-	}
-
 	window::~window()
 	{
 		close();
@@ -51,6 +42,9 @@ namespace gui
 
 	bool window::is_open()
 	{
+		if (m_data.closed == true || m_handle == nullptr)
+			return false;
+
 		return !glfwWindowShouldClose(m_handle.get());
 	}
 
@@ -59,6 +53,8 @@ namespace gui
 		if (m_handle != nullptr)
 		{
 			glfwDestroyWindow(m_handle.get());
+			m_handle = nullptr;
+			m_data.closed = true;
 			--s_window_count;
 
 			if(s_window_count == 0)
@@ -68,9 +64,9 @@ namespace gui
 
 	void window::display() const
 	{
-		clear();
-
 		glfwSwapBuffers(m_handle.get());
+
+		clear();
 	}
 
 	bool window::poll_event(event& e)
@@ -81,6 +77,11 @@ namespace gui
 		e = m_data.events.front();
 		m_data.events.pop();
 		return true;
+	}
+
+	GLFWwindow* window::get_handle()
+	{
+		return m_handle.get();
 	}
 
 	window::window(glm::ivec2 resolution, std::string const & title)
@@ -103,8 +104,15 @@ namespace gui
 		return *this;
 	}
 
-	void window::open()
+	void window::open(glm::ivec2 const& resolution, std::string const& title)
 	{
+		m_data.closed = false;
+		m_data.focused = false;
+		m_data.maximized = false;
+		m_data.minimized = false;
+		m_data.resolution = resolution;
+		m_data.title = title;
+
 		if (s_window_count == 0)
 		{
 			if (!glfwInit())

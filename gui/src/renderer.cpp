@@ -8,6 +8,11 @@ namespace gui
 {
 	namespace internal
 	{
+		renderer::renderer()
+			: m_clear_type{ GL_COLOR_BUFFER_BIT }
+		{
+		}
+
 		void renderer::clear() const
 		{
 			GL_CALL(glClearColor(m_clear_color.x, m_clear_color.y, m_clear_color.z, m_clear_color.w));

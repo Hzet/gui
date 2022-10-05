@@ -133,9 +133,8 @@ int main()
 	{
 		auto app = gui::create_application();
 
+		app->create({ 1280, 1024 }, "Test app");
 		app->run();
-
-		app->close();
 	}
 	catch (std::exception& e)
 	{
